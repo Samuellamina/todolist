@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 public class DemoServiceImpl implements DemoService {
 
     @Override
-    public String getHelloMessage(String user) {
-        return "Hello " + user;
+    public String getHelloMessage(String user, int age) {
+        return "Hello " + user + " your age is " + age;
     }
 
     @Override
