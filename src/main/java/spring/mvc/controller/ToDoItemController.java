@@ -9,7 +9,6 @@ import spring.mvc.util.ViewNames;
 
 @Controller
 public class ToDoItemController {
-
     // model attributes
     @ModelAttribute
     public ToDoData toDoData() {
