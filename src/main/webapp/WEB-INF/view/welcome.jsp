@@ -5,6 +5,6 @@
     <title>Title</title>
 </head>
 <body>
-<h1>WELCOME.JSP</h1>
+<h1>WELCOME ${user}</h1>
 </body>
 </html>
