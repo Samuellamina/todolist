@@ -15,10 +15,10 @@ public class ToDoData {
     private final List<ToDoItem> items = new ArrayList<>();
 
     public ToDoData() {
-        addItem(new ToDoItem("first", "fiest details", LocalDate.now()));
-        addItem(new ToDoItem("secong", "secong details", LocalDate.now()));
-        addItem(new ToDoItem("thirf", "thirf details", LocalDate.now()));
-        addItem(new ToDoItem("zourth", "zourth details", LocalDate.now()));
+        addItem(new ToDoItem("BABA", "fiest details", LocalDate.now()));
+        addItem(new ToDoItem("ZEZE", "secong details", LocalDate.now()));
+        addItem(new ToDoItem("EZEZ", "thirf details", LocalDate.now()));
+        addItem(new ToDoItem("ABAB", "zourth details", LocalDate.now()));
     }
 
     public List<ToDoItem> getItems() {
