@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import spring.mvc.model.ToDoData;
 import spring.mvc.model.ToDoItem;
 import spring.mvc.service.ToDoItemService;
@@ -39,8 +40,13 @@ public class ToDoItemController {
     }
 
     @GetMapping(Mappings.ADD_ITEM)
-    public String addEditItem(Model model) {
-        ToDoItem toDoItem = new ToDoItem("", "", LocalDate.now());
+    public String addEditItem(@RequestParam(required = false, defaultValue = "-1") int id,
+                              Model model) {
+        log.info("EDITING id = {}", id);
+        ToDoItem toDoItem = toDoItemService.getItem(id);
+        if (toDoItem == null ){
+            toDoItem = new ToDoItem("", "", LocalDate.now());
+        }
         model.addAttribute(AttributeNames.TODO_ITEM, toDoItem);
         return ViewNames.ADD_ITEM;
     }
@@ -48,7 +54,21 @@ public class ToDoItemController {
     @PostMapping(Mappings.ADD_ITEM)
     public String processItem(@ModelAttribute(AttributeNames.TODO_ITEM) ToDoItem toDoItem) {
         log.info("toDoItem from = {}", toDoItem);
-        toDoItemService.addItem(toDoItem);
+
+        if(toDoItem.getId() == 0) {
+            toDoItemService.addItem(toDoItem);
+
+        } else {
+            toDoItemService.updateItem(toDoItem);
+
+        }
         return "redirect:/" + Mappings.ITEMS;
+    }
+
+    @GetMapping(Mappings.VIEW_ITEM)
+    public String viewItem(@RequestParam int id, Model model) {
+        ToDoItem toDoItem = toDoItemService.getItem(id);
+        model.addAttribute(AttributeNames.TODO_ITEM, toDoItem);
+        return ViewNames.VIEW_ITEM;
     }
 }
